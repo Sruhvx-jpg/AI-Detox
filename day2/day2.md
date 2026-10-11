@@ -21,8 +21,12 @@ and consitant pattern such that x2 should come right after x1 than  concurrent t
 are not what you want as data is piped in a inconsistant manner by different transformer channels.
 
 After this my clanker also suggested me to use buffered channel buffer = faster. According
-to the clanker buffer channel are faster becuase a un-buffered channel doesnt copy data 
+to the clanker buffer channel are faster becuase a un-buffered channel  copies data 
 from one goroutine stack to another goroutines stack via direct memory move (memmove)
+
+internally a channel is called  `hchan` having a  `buf unsafe.pointer` - This buffer (basically 
+ram) can be thought of as mailbox, which can just transported from one channel to another
+without having to copy that data!
 
 well after this it suggested me to use context which i didnt found much ammusing, it was
 mostly related to make sure there is no resource leak. After thi i again asked my clanker
