@@ -24,9 +24,13 @@ After this my clanker also suggested me to use buffered channel buffer = faster.
 to the clanker buffer channel are faster becuase a un-buffered channel  copies data 
 from one goroutine stack to another goroutines stack via direct memory move (memmove)
 
+well u may wonder why copying is wrong, it is essential what every programme does to share
+data or to pass data to each other, but in go the sender channel has to be sleep till the reciever
+is born or comes back from sleep. In a way a un-buffered channel is liable to look over the data 
+till the reciever comes!
+
 internally a channel is called  `hchan` having a  `buf unsafe.pointer` - This buffer (basically 
-ram) can be thought of as mailbox, which can just transported from one channel to another
-without having to copy that data!
+ram) can be thought of as mailbox, which can be easily just be picked up ( copy )
 
 well after this it suggested me to use context which i didnt found much ammusing, it was
 mostly related to make sure there is no resource leak. After thi i again asked my clanker
